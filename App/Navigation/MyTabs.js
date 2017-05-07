@@ -3,6 +3,7 @@ import { ScrollView, Text } from 'react-native'
 import { connect } from 'react-redux'
 import MyTab1 from '../Containers/MyTab1'
 import MyTab2 from '../Containers/MyTab2'
+import MyTab3 from '../Containers/MyTab3'
 import { TabNavigator } from 'react-navigation'
 
 // Add Actions - replace 'Your' with whatever your reducer is called :)
@@ -17,6 +18,9 @@ const MyTabs = TabNavigator({
   },
   Notifications: {
     screen: MyTab2,
+  },  
+  Profile: {
+    screen: MyTab3,
   },
 }, {
   tabBarOptions: {

@@ -1,5 +1,5 @@
 import React from 'react'
-import { ScrollView, Text } from 'react-native'
+import { ScrollView, Text,Button } from 'react-native'
 import { connect } from 'react-redux'
 // Add Actions - replace 'Your' with whatever your reducer is called :)
 // import YourActions from '../Redux/YourRedux'
@@ -18,6 +18,9 @@ class MyTab1 extends React.Component {
     return (
       <ScrollView style={styles.container}>
         <Text>MyTab1 Container</Text>
+        <Button
+          onPress={() => this.props.navigation.navigate('LaunchScreen')}
+          title="Go Back"/>
       </ScrollView>
     )
   }
