@@ -6,7 +6,8 @@ import RehydrationServices from '../Services/RehydrationServices'
 import ReduxPersist from '../Config/ReduxPersist'
 
 // creates the store
-export default (rootReducer, rootSaga) => {
+// export default (rootReducer, rootSaga) => {
+export default (rootReducer, rootSaga, rootEpic) => {
   /* ------------- Redux Configuration ------------- */
 
   const middleware = []
@@ -16,6 +17,8 @@ export default (rootReducer, rootSaga) => {
 
   const sagaMonitor = __DEV__ ? console.tron.createSagaMonitor() : null
   const sagaMiddleware = createSagaMiddleware({ sagaMonitor })
+
+
   middleware.push(sagaMiddleware)
 
   /* ------------- Assemble Middleware ------------- */
@@ -28,6 +31,7 @@ export default (rootReducer, rootSaga) => {
   if (ReduxPersist.active) {
     enhancers.push(autoRehydrate())
   }
+  enhancers.push(rootEpic)
 
   // if Reactotron is enabled (default for __DEV__), we'll create the store through Reactotron
   const createAppropriateStore = Config.useReactotron ? console.tron.createStore : createStore
@@ -39,7 +43,7 @@ export default (rootReducer, rootSaga) => {
   }
 
   // kick off root saga
-  sagaMiddleware.run(rootSaga)
+  // sagaMiddleware.run(rootSaga)
 
   return store
 }
