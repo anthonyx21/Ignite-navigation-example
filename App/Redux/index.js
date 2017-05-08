@@ -1,6 +1,8 @@
-import { combineReducers } from 'redux'
+import { combineReducers, applyMiddleware, createStore } from 'redux'
 import configureStore from './CreateStore'
-import rootSaga from '../Sagas/'
+// import rootSaga from '../Sagas/'
+import {createEpicMiddleware} from 'redux-observable';
+import rootEpic from '../Epics';
 
 export default () => {
   /* ------------- Assemble The Reducers ------------- */
@@ -10,5 +12,9 @@ export default () => {
     search: require('./SearchRedux').reducer
   })
 
-  return configureStore(rootReducer, rootSaga)
+  const epicMiddleware = createEpicMiddleware(rootEpic);
+
+console.log(epicMiddleware);
+  // return configureStore(rootReducer, rootSaga)
+  return createStore(rootReducer, applyMiddleware(epicMiddleware))
 }

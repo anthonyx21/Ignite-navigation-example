@@ -6,7 +6,8 @@ import Immutable from 'seamless-immutable'
 const { Types, Creators } = createActions({
   userRequest: ['username'],
   userSuccess: ['avatar'],
-  userFailure: null
+  userFailure: null,
+  getUserAvatar: ['username'],
 })
 
 export const GithubTypes = Types

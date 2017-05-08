@@ -1,13 +1,14 @@
 import React from 'react'
 import { ScrollView, Text, Image, View, Button } from 'react-native'
 import DevscreensButton from '../../ignite/DevScreens/DevscreensButton.js'
-
+import { connect } from 'react-redux'
 import { Images } from '../Themes'
+import GithubActions from '../Redux/GithubRedux';
 
 // Styles
 import styles from './Styles/LaunchScreenStyles'
 
-export default class LaunchScreen extends React.Component {
+class LaunchScreen extends React.Component {
 
   render () {
     return (
@@ -34,9 +35,25 @@ export default class LaunchScreen extends React.Component {
           <Button
             onPress={() => this.props.navigation.navigate('MyDrawer')}
             title="Go to Drawer"/>
+          <Button
+            onPress={() => this.props.testGithub()}
+            title="Test Redux Observable"/>
           {/*<DevscreensButton />*/}
         </ScrollView>
       </View>
     )
   }
 }
+
+const mapStateToProps = (state) => {
+  return {
+  }
+}
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    testGithub: () => dispatch(GithubActions.getUserAvatar('anthonyx21')),
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(LaunchScreen)
